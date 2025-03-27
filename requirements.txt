@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+python-dotenv
+firebase-admin
+httpx
+passlib
+pyjwt
+email-validator
+cryptography
+

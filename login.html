@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Neutron Login</title>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+  </head>
+  <body>
+    <h2>Login ke Neutron</h2>
+    <button onclick="signIn()">Login with Google</button>
+
+    <pre id="output"></pre>
+
+    <script>
+      const firebaseConfig = {
+        apiKey: 'AIzaSyDKnppi-GHnRzUUix2JBBXCpRxMin7FcHU',
+        authDomain: 'neutron-fc581.firebaseapp.com',
+        projectId: 'neutron-fc581',
+        storageBucket: 'neutron-fc581.firebasestorage.app',
+        messagingSenderId: '801605491874',
+        appId: '1:801605491874:web:4eecae48f8eab4369f0bfb',
+      };
+
+      firebase.initializeApp(firebaseConfig);
+
+      async function signIn() {
+        const provider = new firebase.auth.GoogleAuthProvider();
+        try {
+          const result = await firebase.auth().signInWithPopup(provider);
+          const idToken = await result.user.getIdToken();
+          const uid = result.user.uid;
+
+          document.getElementById('output').textContent =
+            '✅ ID Token:\n\n' + idToken + '\n\n🆔 UID:\n\n' + uid;
+        } catch (error) {
+          document.getElementById('output').textContent = '❌ Login error:\n\n' + error.message;
+        }
+      }
+    </script>
+  </body>
+</html>
